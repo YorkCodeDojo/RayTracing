@@ -87,7 +87,7 @@ void DrawScene(Bitmap* pBitmap)
     }
 }
 
-void main(void* arg, void** args)
+int main()
 {
     Bitmap* pBitmap = CreateBitmap(ImageWidth, ImageHeight);
 
@@ -98,9 +98,16 @@ void main(void* arg, void** args)
 
     DrawScene(pBitmap);
 
-    WriteBitmap(pBitmap, "image.bmp");
+    const char* pImage = "image.bmp";
+    WriteBitmap(pBitmap, pImage);
 
     DestroyBitmap(pBitmap);
 
+#ifdef _MSC_VER
     system("start image.bmp");
+#else
+    // Requires ImageMagick?
+    system("display image.bmp");
+#endif
+    return 0;
 }
