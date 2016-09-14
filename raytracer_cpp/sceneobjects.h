@@ -32,20 +32,25 @@ struct SceneObject
     virtual bool Intersects(const vec3& rayOrigin, const vec3& rayDir, float& distance) const = 0;
 };
 
-// A sphere, at a coordinate, with a radius and a material
+// A sphere, at a center position, with a radius and a material
 struct Sphere : SceneObject
 {
     vec3 center;
     float radius;
     Material material;
 
-    Sphere(const Material& mat, const vec3& c, const float r)
+    explicit Sphere(const Material& mat, const vec3& c, const float r)
     {
         material = mat;
         center = c;
         radius = r;
     }
 
+    // Don't allow it to be copied
+    Sphere& operator=(const Sphere&) = delete;
+    Sphere(const Sphere&) = delete;
+
+    // The material for the sphere currently doesn't vary with position
     virtual const Material& GetMaterial(const vec3& pos) const override
     {
         return material;
@@ -56,16 +61,19 @@ struct Sphere : SceneObject
         return SceneObjectType::Sphere;
     }
 
+    // Given a point on the sphere, return a normal
     virtual vec3 GetSurfaceNormal(const vec3& pos) const
     {
         return normalize(pos - center);
     }
-    
+   
+    // Get a ray to the sphere from a given point in world space
     virtual vec3 GetRayFrom(const vec3& from) const override
     {
         return normalize(center - from);
     }
 
+    // Return true if the sphere intersects the ray, and the distance to the ray
     virtual bool Intersects(const vec3& rayOrigin, const vec3& rayDir, float& distance) const
     {
         bool hit = glm::intersectRaySphere(rayOrigin, glm::normalize(rayDir), center, radius * radius, distance);
@@ -88,7 +96,7 @@ struct Plane : SceneObject
 struct TiledPlane : Plane
 {
     mutable Material mat;
-    TiledPlane(const vec3& o, const vec3& n)
+    explicit TiledPlane(const vec3& o, const vec3& n)
     {
         normal = n;
         origin = o;
@@ -96,6 +104,11 @@ struct TiledPlane : Plane
         mat.specular = vec3(1.0f, 1.0f, 1.0f);
     }
 
+    // Don't allow it to be copied
+    TiledPlane& operator=(const Sphere&) = delete;
+    TiledPlane(const TiledPlane&) = delete;
+
+    // The plane has a different material depending on the position
     virtual const Material& GetMaterial(const vec3& pos) const override
     {
         bool white = ((int(floor(pos.x) + /*floor(pos.y) +*/ floor(pos.z)) & 1) == 0);

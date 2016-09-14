@@ -67,6 +67,12 @@ namespace Tracer
         // Trace a ray into the scene, return the accumulated light value
         vec3 TraceRay(vec3 rayorig, vec3 raydir, int depth)
         {
+            // Walk the scene objects
+            /*
+            foreach (var obj in sceneObjects)
+            {
+                
+            }*/
             // For now, just convert the incoming ray to a 'color' to display it has it changes 
             return new vec3((raydir * .5f) + new vec3(0.5f, 0.5f, 0.5f));
         }
@@ -85,6 +91,7 @@ namespace Tracer
 
                     color *= 255.0f;
 
+                    // Better way to do this in C# ?
                     UInt32 outColor = ((UInt32)color.x << 16) | ((UInt32)color.y << 8) | ((UInt32)color.z) | 0xFF000000; 
                     var pPixel = (UInt32*)(pData + (y * stride) + (x * 4));
                     *pPixel = outColor;

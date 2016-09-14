@@ -15,7 +15,7 @@ struct Camera
     float imageWidth;       // Width/height of the view plane
     float imageHeight;
 
-    Camera(const vec3& cameraPosition, const vec3& dir, float fov, int width, unsigned int height)
+    explicit Camera(const vec3& cameraPosition, const vec3& dir, float fov, int width, unsigned int height)
     {
         position = cameraPosition;
 
@@ -43,6 +43,10 @@ struct Camera
         // The half-width of the viewport, in world space
         halfAngle = float(tan(glm::radians(fov) / 2.0));
     }
+
+    // Not copyable
+    Camera(const Camera&) = delete;
+    Camera& operator=(const Camera&) = delete;
 
     // Given a screen coordinate, return a ray leaving the camera and entering the world at that 'pixel'
     vec3 GetWorldRay(const vec2& imageSample)
