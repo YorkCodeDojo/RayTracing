@@ -135,10 +135,10 @@ vec3 TraceRay(const vec3& rayorig, const vec3 &raydir, const int depth)
                 continue;
             }
 
-            // If we hit something emissive...
+            // If we hit something, it automatically obscures us ...
             if (occluder->Intersects(pos + (emitterDir * 0.001f), emitterDir, distance))
             {
-                // ... and it is closer
+                // ... if is closer
                 if (emitterDistance > distance)
                 {
                     occluded = true;
@@ -147,6 +147,7 @@ vec3 TraceRay(const vec3& rayorig, const vec3 &raydir, const int depth)
             }
         }
 
+        // We can 'see' this light
         if (!occluded)
         {
             // Simple phong lighting
