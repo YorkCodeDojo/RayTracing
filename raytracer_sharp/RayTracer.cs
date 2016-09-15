@@ -47,11 +47,11 @@ namespace Tracer
             mat.emissive = new vec3(0.0f, 0.0f, 0.0f);
             sceneObjects.Add(new Sphere(mat, new vec3(-0.0f, 0.5f, 3.0f), 0.5f));
 
-            // Green ball
+            // Yellow ball on floor
             mat.albedo = new vec3(1.0f, 1.0f, 1.0f);
             mat.specular = new vec3(0.0f, 0.0f, 0.0f);
             mat.reflectance = 0.0f;
-            mat.emissive = new vec3(2.0f, 2.0f, 2.0f);
+            mat.emissive = new vec3(1.0f, 1.0f, 0.2f);
             sceneObjects.Add(new Sphere(mat, new vec3(2.8f, 0.8f, 2.0f), 0.8f));
 
             // White light
@@ -91,8 +91,13 @@ namespace Tracer
 
                     color *= 255.0f;
 
+                    // Clamp
+                    color.x = Math.Min(255.0f, color.x);
+                    color.y = Math.Min(255.0f, color.y);
+                    color.z = Math.Min(255.0f, color.z);
+
                     // Better way to do this in C# ?
-                    UInt32 outColor = ((UInt32)color.x << 16) | ((UInt32)color.y << 8) | ((UInt32)color.z) | 0xFF000000; 
+                    UInt32 outColor = ((UInt32)color.x << 16) | ((UInt32)color.y << 8) | ((UInt32)color.z) | 0xFF000000;
                     var pPixel = (UInt32*)(pData + (y * stride) + (x * 4));
                     *pPixel = outColor;
                 }

@@ -1,6 +1,7 @@
 ﻿using GlmNet;
 namespace Tracer
 {
+
     class GeometryMath
     {
         // Return the distance along a ray that a sphere is found - if possible

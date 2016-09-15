@@ -42,6 +42,13 @@ void InitScene()
     mat.emissive = vec3(0.0f, 0.0f, 0.0f);
     sceneObjects.push_back(std::make_shared<Sphere>(mat, vec3(-0.0f, 0.5f, 3.f), 0.5f));
     
+    // Yellow ball on floor
+    mat.albedo = vec3(1.0f, 1.0f, 1.0f);
+    mat.specular = vec3(0.0f, 0.0f, 0.0f);
+    mat.reflectance = .0f;
+    mat.emissive = vec3(1.0f, 1.0f, 0.2f);
+    sceneObjects.push_back(std::make_shared<Sphere>(mat, vec3(2.8f, 0.8f, 2.0f), 0.8f));
+
     // White light (distant)
     mat.albedo = vec3(0.0f, 0.8f, 0.0f);
     mat.specular = vec3(0.0f, 0.0f, 0.0f);
