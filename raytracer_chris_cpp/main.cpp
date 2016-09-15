@@ -147,23 +147,25 @@ vec3 TraceRay(const vec3& rayorig, const vec3 &raydir, const int depth)
             }
         }
 
-        // Simple phong lighting
-        float specI = 0.0f;
-        
-        // Clamp to >= 0.  Because negative means the light points away from the normal
-        float diffuseI = std::max(dot(normal, emitterDir), 0.0f);
-        if (diffuseI > 0.0f)
+        if (!occluded)
         {
-            specI = std::max(dot(reflect, emitterDir), 0.0f);
-            
-            // Increase the specular by a power to give it a nice falloff
-            specI = pow(specI, 10);
-        }
+            // Simple phong lighting
+            float specI = 0.0f;
 
-        // light intensity * light color * material color + specular intensity * specular color
-        outputColor += (emissiveMat.emissive * material.albedo * diffuseI) + (material.specular * specI * emissiveMat.emissive);
+            // Clamp to >= 0.  Because negative means the light points away from the normal
+            float diffuseI = std::max(dot(normal, emitterDir), 0.0f);
+            if (diffuseI > 0.0f)
+            {
+                specI = std::max(dot(reflect, emitterDir), 0.0f);
+
+                // Increase the specular by a power to give it a nice falloff
+                specI = pow(specI, 10);
+            }
+
+            // light intensity * light color * material color + specular intensity * specular color
+            outputColor += (emissiveMat.emissive * material.albedo * diffuseI) + (material.specular * specI * emissiveMat.emissive);
+        }
     }
-    outputColor += material.emissive;
     return outputColor;
 }
 
