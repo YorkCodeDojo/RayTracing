@@ -3,5 +3,6 @@ Release
 *.bmp
 *.opendb
 *.db
+*.suo
 *.tmp
 ~$RayTracing.pptx
