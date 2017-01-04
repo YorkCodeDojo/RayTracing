@@ -1,6 +1,7 @@
 ﻿using GlmNet;
 namespace Tracer
 {
+
     class GeometryMath
     {
         // Return the distance along a ray that a sphere is found - if possible
@@ -35,7 +36,7 @@ namespace Tracer
         }
 
         // Given an incident ray and a normal to the surface, return a reflected ray
-        public static vec3 reflect(vec3 I, vec3 N)
+        vec3 reflect(vec3 I, vec3 N)
         {
             return I - N * glm.dot(N, I) * 2.0f;
         }

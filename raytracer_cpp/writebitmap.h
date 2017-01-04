@@ -83,7 +83,7 @@ This rather hacky function to write a bitmap is taken from here.
 Just give it the size of your array and the RGB (24Bit)
 https://en.wikipedia.org/wiki/User:Evercat/Buddhabrot.c
 */
-static void WriteBitmap(Bitmap* pBitmap, char * filename)
+static void WriteBitmap(Bitmap* pBitmap, const char * filename)
 {
     uint32_t headers[13];
     FILE * outfile;

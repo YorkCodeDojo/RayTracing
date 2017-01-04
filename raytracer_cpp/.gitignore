@@ -1,0 +1,7 @@
+Debug
+RayTracer
+Release
+*.bmp
+*.opendb
+*.db
+*.tmp
