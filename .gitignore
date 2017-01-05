@@ -5,4 +5,7 @@ Release
 *.db
 *.suo
 *.tmp
+*.png
+*.bmp
+__pycache__
 ~$RayTracing.pptx

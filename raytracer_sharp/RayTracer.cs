@@ -67,10 +67,9 @@ namespace Tracer
         // Trace a ray into the scene, return the accumulated light value
         vec3 TraceRay(vec3 rayorig, vec3 raydir, int depth)
         {
-            throw new Exception("Uncomment the CS or FS versions");
-            //var pixelValue = RayTracerFSharp.Tracer.Trace(rayorig, raydir, depth, sceneObjects);
-            //var pixelValue = RayTracerCSharp.RayTracer.TraceRay(rayorig, raydir, depth, sceneObjects);
-            //return pixelValue;
+            //throw new Exception("Uncomment the CS or FS versions");
+//            return RayTracerFSharp.Tracer.Trace(rayorig, raydir, depth, sceneObjects);
+            return RayTracerCSharp.RayTracer.TraceRay(rayorig, raydir, depth, sceneObjects);
         }
 
         public unsafe void Run(byte* pData, int stride)

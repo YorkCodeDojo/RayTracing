@@ -22,6 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="camera.py" />
+    <Compile Include="raymath.py" />
     <Compile Include="raytracer.py" />
   </ItemGroup>
   <ItemGroup>
